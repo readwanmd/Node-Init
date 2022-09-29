@@ -1,0 +1,5 @@
+20220929	13:30:00	172e313c-5ea7-48b8-8e59-100dfae48ab3	Error: Not allowed by CORS! 
+20220929	22:53:22	4cafbaff-8448-48e0-996e-28ba78d4b0c1	SyntaxError: Unexpected number in JSON at position 9 
+20220929	22:54:27	b01d32e4-ac17-4c51-8f92-d399c8f3b9d7	SyntaxError: Unexpected token } in JSON at position 10 
+20220929	22:54:32	c94e5eb2-c61e-4728-9961-a7a1a2fbf73e	TypeError: Cannot read properties of undefined (reading 'id') 
+20220929	22:55:43	3ab19288-f071-4271-ba24-b674b9fdcbc7	TypeError: Cannot read properties of undefined (reading 'id') 
