@@ -131,3 +131,9 @@
 20220930	00:53:07	2e98982e-c311-4ea6-9505-03ab07a31b40	POST	undefined	/employees 
 20220930	00:53:08	36ca673c-05c7-471d-92a9-3698a54b857f	POST	undefined	/employees 
 20220930	00:53:09	69db6190-3ee5-4f05-8828-fdc836a2ccb2	POST	undefined	/employees 
+20220930	01:06:54	4c771661-4617-4f2f-b87c-a6e39c7916b1	GET	undefined	/ 
+20220930	01:06:54	77bfce35-e8a3-48a4-90cd-7fe92b9e8aa0	GET	undefined	/css/style.css 
+20220930	01:07:00	76d43bf8-96a7-4816-b40a-28fa059f4a41	GET	undefined	/index 
+20220930	01:07:00	4ef437cc-031d-493b-8b98-ff34b0f6e904	GET	undefined	/css/style.css 
+20220930	01:07:07	5c3253de-6880-4b4e-8c36-e7861ce22dfc	GET	undefined	/index.html 
+20220930	01:07:07	6c76e9a5-457f-4904-ba71-8d32b2e86b9a	GET	undefined	/css/style.css 

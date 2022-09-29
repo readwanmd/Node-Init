@@ -23,11 +23,9 @@ app.use(express.json());
 
 //middleware for serve static files
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/subdir', express.static(path.join(__dirname, 'public')));
 
 //sub directories
 app.use('/', require('./routes/root'));
-app.use('/subdir', require('./routes/subdir'));
 app.use('/employees', require('./routes/api/employees'));
 
 //All other routes
