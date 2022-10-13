@@ -4,6 +4,9 @@ const cors = require('cors');
 const corsOptions = require('./config/corsOptions');
 const { logger } = require('./middleware/logEvent');
 const errorHandler = require('./middleware/errorHandler');
+const verifyJwt = require('./middleware/verifyJWT');
+const cookieParser = require('cookie-parser');
+const credentials = require('./middleware/credentials');
 
 const PORT = process.env.PORT || 3500;
 
@@ -11,6 +14,10 @@ const app = express();
 
 //custome middleware for Logger
 app.use(logger);
+
+//handle options credentials check - before CORS
+//and fetch cookies credentials requiements
+app.use(credentials);
 
 //Cross Origin Resource Sharing
 app.use(cors(corsOptions));
@@ -21,6 +28,9 @@ app.use(express.urlencoded({ extended: false }));
 //built in middleware for JSON
 app.use(express.json());
 
+//middleware for cookies
+app.use(cookieParser());
+
 //middleware for serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -28,6 +38,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', require('./routes/root'));
 app.use('/register', require('./routes/register'));
 app.use('/auth', require('./routes/auth'));
+app.use('/refresh', require('./routes/refresh'));
+app.use('/logout', require('./routes/logout'));
+
+app.use(verifyJwt);
 app.use('/employees', require('./routes/api/employees'));
 
 //All other routes
