@@ -1,12 +1,16 @@
-const usersDB = {
-	users: require('../model/users.json'),
-	setUser: function (data) {
-		this.users = data;
-	},
-};
+const User = require('../model/User');
 
-const fsPromises = require('fs').promises;
-const path = require('path');
+//JSON File was used for store data at begening
+// const usersDB = {
+// 	users: require('../model/users.json'),
+// 	setUser: function (data) {
+// 		this.users = data;
+// 	},
+// };
+
+// const fsPromises = require('fs').promises;
+// const path = require('path');
+
 const bcrypt = require('bcrypt');
 
 const handleNewUser = async (req, res) => {
@@ -18,7 +22,9 @@ const handleNewUser = async (req, res) => {
 	}
 
 	//check if user already exists
-	const duplicate = usersDB.users.find((person) => person.username === user);
+	// const duplicate = usersDB.users.find((person) => person.username === user); //used for JSON in File System
+	const duplicate = await User.findOne({ username: user }).exec();
+
 	if (duplicate) {
 		return res.sendStatus(409); //conflit
 	}
@@ -26,19 +32,24 @@ const handleNewUser = async (req, res) => {
 	try {
 		//encript password
 		const hashedPwd = await bcrypt.hash(pwd, 10);
-		//store new user
-		const newUser = {
+		//create & store new user in mongodb
+		const result = await User.create({
 			username: user,
-			roles: { User: 2001 },
 			password: hashedPwd,
-		};
-		usersDB.setUser([...usersDB.users, newUser]);
+		});
 
-		await fsPromises.writeFile(
-			path.join(__dirname, '..', 'model', 'users.json'),
-			JSON.stringify(usersDB.users)
-		);
-		console.log(usersDB.users);
+		console.log(result);
+
+		//store new user
+		//used for JSON in File System
+		// usersDB.setUser([...usersDB.users, newUser]);
+
+		// await fsPromises.writeFile(
+		// 	path.join(__dirname, '..', 'model', 'users.json'),
+		// 	JSON.stringify(usersDB.users)
+		// );
+		// console.log(usersDB.users);
+
 		res.status(201).json({ success: `New user ${user} created successfully!` });
 	} catch (err) {
 		res.status(500).json({ message: `${err.message}` });
